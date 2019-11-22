@@ -171,7 +171,6 @@ public class MySQLConnection {
 			}
 			doctors.get(doctorid - 1).setPatients(patients);
 			
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
