@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Doctor {
-	
+	///
 	private int id;
 	private String name;
 	private String lastname;
