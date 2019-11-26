@@ -25,6 +25,10 @@ public class MySQLConnection {
 	public static String DOCTORS_NAME = "name";
 	public static String DOCTORS_LASTNAME = "lastname";
 	public static String DOCTORS_CC = "cc";
+	public static String DOCTORS_AGE = "age";
+	public static String DOCTORS_PHONE = "phone";
+	public static String DOCTORS_EMAIL = "email";
+	public static String DOCTORS_DCPASSWORD = "dcpassword";
 	public static String PATIENTS_ID = "id";
 	public static String PATIENTS_NAME = "name";
 	public static String PATIENTS_LASTNAME = "lastname";
@@ -61,15 +65,26 @@ public class MySQLConnection {
 	}
 
 	public void registerDoctor(Doctor doctor) {
-		String sql="INSERT INTO $TABLE($NAME,$LASTNAME, $CC) VALUES('$VNAME','$VLASTNAME','$VCC')";
+		//https://zinoui.com/blog/storing-passwords-securely
+		String sql="INSERT INTO $TABLE($NAME,$LASTNAME, $CC,$AGE,$PHONE,$EMAIL,$DCPASSWORD) VALUES('$VNAME','$VLASTNAME','$VCC',$VAGE,'$VPHONE','$VEMAIL',ENCODE('$VDCPASSWORD', 'secret'))";
 		sql=sql
 				.replace("$TABLE", TABLE_DOCTORS)
 				.replace("$NAME", DOCTORS_NAME)
 				.replace("$LASTNAME", DOCTORS_LASTNAME)
 				.replace("$CC", DOCTORS_CC)
+				.replace("$AGE", DOCTORS_AGE)
+				.replace("$PHONE", DOCTORS_PHONE)
+				.replace("$EMAIL", DOCTORS_EMAIL)
+				.replace("$DCPASSWORD", DOCTORS_DCPASSWORD)
 				.replace("$VNAME", doctor.getName())
 				.replace("$VLASTNAME", doctor.getLastname())
-				.replace("$VCC", doctor.getCc());
+				.replace("$VCC", doctor.getCc())
+				.replace("$VAGE", doctor.getAge() + "")
+				.replace("$VPHONE", doctor.getPhone())
+				.replace("$VEMAIL", doctor.getEmail())
+				.replace("VDCPASSWORD", doctor.getPassword())
+				;
+
 		
 		try {
 			statement.execute(sql);
@@ -133,7 +148,11 @@ public class MySQLConnection {
 				String name = resultados.getString(2);
 				String lastname = resultados.getString(3);
 				String cc = resultados.getString(4);
-				doctors.add(new Doctor(id,name,lastname, cc));
+				int age = resultados.getInt(5);
+				String phone = resultados.getString(6);
+				String email = resultados.getString(7);
+				String password = resultados.getString(8);
+				doctors.add(new Doctor(id,name,lastname,cc,age,phone,email,password));
 			}
 			
 			
