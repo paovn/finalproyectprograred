@@ -2,6 +2,7 @@ package services;
 
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
@@ -11,6 +12,12 @@ import model.Doctor;
 @Stateless
 @Path("doctor")
 public class DoctorServices {
+	@Path("echo")
+	@GET
+	public String prueba() {
+		return "echo";
+		
+	}
 	
 	@POST
 	@Path("insert")

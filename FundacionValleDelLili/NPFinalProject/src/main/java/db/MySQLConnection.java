@@ -82,7 +82,7 @@ public class MySQLConnection {
 				.replace("$VAGE", doctor.getAge() + "")
 				.replace("$VPHONE", doctor.getPhone())
 				.replace("$VEMAIL", doctor.getEmail())
-				.replace("VDCPASSWORD", doctor.getPassword())
+				.replace("$VDCPASSWORD", doctor.getPassword())
 				;
 
 		

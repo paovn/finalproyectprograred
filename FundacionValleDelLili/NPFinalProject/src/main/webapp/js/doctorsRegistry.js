@@ -9,6 +9,7 @@ var emailTXT;
 var passwordTXT;
 var verifypasswordTXT;
 var registerBTN;
+var doctor;
 
 function init(){
 
@@ -24,9 +25,7 @@ function init(){
     
     
     registerBTN.addEventListener("click",()=>{
-        console.log("CC" + ccTXT.value);
-        console.log("name" + nameTXT.value);
-        var doctor = new Doctor(ccTXT.value,nameTXT.value,surnameTXT.value,ageTXT.value,phoneTXT.value,emailTXT.value,passwordTXT.value);
+        doctor = new Doctor(ccTXT.value,nameTXT.value,surnameTXT.value,ageTXT.value,phoneTXT.value,emailTXT.value,passwordTXT.value);
         var json = doctor.toJson();
         console.log(json);
         insertDoctor(json); 
@@ -38,7 +37,6 @@ function insertDoctor(json){
     var http = new XMLHttpRequest();
     http.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
-            insertSalida.innerHTML = this.responseText;
             alert("The doctor has been saved");
         }
     }
