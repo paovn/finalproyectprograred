@@ -17,7 +17,7 @@ import model.Patient;
 @Stateless
 @Path("patient")
 public class PatientServices {
-	
+	//
 	@POST
 	@Path("insert")
 	@Consumes("application/json")
