@@ -32,7 +32,12 @@ public class MySQLConnection {
 	public static String PATIENTS_ID = "id";
 	public static String PATIENTS_NAME = "name";
 	public static String PATIENTS_LASTNAME = "lastname";
-	public static String PATIENTS_BIRTHDATE = "birthdate";
+	public static String PATIENTS_PHONE = "phone";
+	public static String PATIENTS_EMAIL = "email";
+	public static String PATIENTS_AGE = "age";
+	public static String PATIENTS_CC = "cc";
+
+
 	public static String PATIENTS_DOCTORID = "doctorID";
 	
 	private ArrayList<Doctor> doctors;
@@ -42,6 +47,7 @@ public class MySQLConnection {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 //			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/blockbuster");
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/doctorsdb","root","");
+
 			statement = connection.createStatement();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -94,17 +100,47 @@ public class MySQLConnection {
 		}
 	}
 
+//	public String registerPatient(Patient patient) {
+//		String sql="INSERT INTO $TABLE($NAME,$LASTNAME,$BIRTHDATE,$DOCTORID) VALUES('$VNAME','$VLASTNAME','$VBIRTHDATE',$VDOCTORID)";
+//		sql=sql
+//				.replace("$TABLE", TABLE_PATIENTS)
+//				.replace("$NAME",PATIENTS_NAME)
+//				.replace("$LASTNAME", PATIENTS_LASTNAME)
+//				.replace("$BIRTHDATE", PATIENTS_BIRTHDATE)
+//				.replace("$DOCTORID", PATIENTS_DOCTORID)
+//				.replace("$VNAME", patient.getName())
+//				.replace("$VLASTNAME", patient.getLastname())
+//				.replace("$VBIRTHDATE", patient.getBirthdate())
+//				.replace("$VDOCTORID", patient.getDoctorID() + "");
+//		
+//		try {
+//			statement.execute(sql);
+//			return patient.getName() + " has been registered to doctor" + patient.getDoctorID();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			return "Could not register the patient";
+//		}
+//		
+//	}
+	
 	public String registerPatient(Patient patient) {
-		String sql="INSERT INTO $TABLE($NAME,$LASTNAME,$BIRTHDATE,$DOCTORID) VALUES('$VNAME','$VLASTNAME','$VBIRTHDATE',$VDOCTORID)";
+		String sql="INSERT INTO $TABLE($NAME,$LASTNAME,$DOCTORID,$PHONE,$EMAIL,$AGE,$CC) VALUES('$VNAME','$VLASTNAME',$VDOCTORID,'$VPHONE','$VEMAIL',$VAGE,$VCC)";
 		sql=sql
 				.replace("$TABLE", TABLE_PATIENTS)
 				.replace("$NAME",PATIENTS_NAME)
 				.replace("$LASTNAME", PATIENTS_LASTNAME)
-				.replace("$BIRTHDATE", PATIENTS_BIRTHDATE)
 				.replace("$DOCTORID", PATIENTS_DOCTORID)
+				.replace("$PHONE", PATIENTS_PHONE)
+				.replace("$EMAIL", PATIENTS_EMAIL)
+				.replace("$AGE", PATIENTS_AGE)
+				.replace("$CC", PATIENTS_CC)
 				.replace("$VNAME", patient.getName())
 				.replace("$VLASTNAME", patient.getLastname())
-				.replace("$VBIRTHDATE", patient.getBirthdate())
+				.replace("$PHONE", patient.getPhone())
+				.replace("$EMAIL", patient.getEmail())
+				.replace("$CC", patient.getCc())
+				.replace("$AGE", patient.getAge()+"")
 				.replace("$VDOCTORID", patient.getDoctorID() + "");
 		
 		try {

@@ -15,7 +15,7 @@ import db.MySQLConnection;
 import model.Patient;
 
 @Stateless
-@Path("patients")
+@Path("patient")
 public class PatientServices {
 	
 	@POST
@@ -26,6 +26,13 @@ public class PatientServices {
 		String message = connection.registerPatient(patient);
 		connection.close();
 		return message;
+	}
+	
+	@GET
+	@Path("echo")
+	public String prueba() {
+		return "echo";
+		
 	}
 	
 	@GET

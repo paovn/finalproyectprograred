@@ -28,6 +28,7 @@ function init(){
         doctor = new Doctor(ccTXT.value,nameTXT.value,surnameTXT.value,ageTXT.value,phoneTXT.value,emailTXT.value,passwordTXT.value);
         var json = doctor.toJson();
         console.log(json);
+        alert(json);
         insertDoctor(json); 
     });
 
@@ -40,7 +41,7 @@ function insertDoctor(json){
             alert("The doctor has been saved");
         }
     }
-    http.open("POST", "web/doctor/insert");
+    http.open("POST","web/doctor/insert");
     http.setRequestHeader("Content-Type","application/json");
     http.send(json);
 }
